@@ -1,4 +1,4 @@
-![image](react-calculator/public/resim.png)
+![image](/public/resim.png)
 
 # Getting Started with Create React App
 
