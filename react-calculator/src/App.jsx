@@ -2,43 +2,59 @@ import "./App.css";
 import Button from "./components/button/Button";
 import Input from "./components/input/Input";
 import { useState } from "react";
+import * as math from "mathjs";
 
 function App() {
   const [text, setText] = useState("")
   const [result, setResult] = useState("")
   
+  function addToText(val) {
+    setText((text) => [...text, val + ""])
+  }
+
+  function clearText() {
+    setText("")
+    setResult("")
+  }
+
+  function calculateResult() {
+    const input = text.join("")
+
+    setResult(math.evaluate(input))
+  }
+
   const buttonColor = "#f2a33c"
   const clearBtnColor= "#8B0000"
 
   return (
     <div className="App">
       <div className="calc-wrapper">
-        <Input />
+        <Input text={text} result={result}/>
         <div className="row">
-          <Button symbol={"7"} />
-          <Button symbol={"8"} />
-          <Button symbol={"9"} />
-          <Button symbol={"/"} color={buttonColor}/>
+          <Button symbol={"7"} handleClick={addToText}/>
+          <Button symbol={"8"} handleClick={addToText}/>
+          <Button symbol={"9"} handleClick={addToText}/>
+          <Button symbol={"/"} handleClick={addToText} color={buttonColor}/>
         </div>
         <div className="row">
-          <Button symbol={"4"} />
-          <Button symbol={"5"} />
-          <Button symbol={"6"} />
-          <Button symbol={"*"} color={buttonColor}/>
+          <Button symbol={"4"} handleClick={addToText}/>
+          <Button symbol={"5"} handleClick={addToText}/>
+          <Button symbol={"6"} handleClick={addToText}/>
+          <Button symbol={"*"} handleClick={addToText} color={buttonColor}/>
         </div>
         <div className="row">
-          <Button symbol={"1"} />
-          <Button symbol={"2"} />
-          <Button symbol={"3"} />
-          <Button symbol={"+"} color={buttonColor}/>
+          <Button symbol={"1"} handleClick={addToText}/>
+          <Button symbol={"2"} handleClick={addToText}/>
+          <Button symbol={"3"} handleClick={addToText}/>
+          <Button symbol={"+"} handleClick={addToText} color={buttonColor}/>
         </div>
         <div className="row">
-          <Button symbol={"0"} />
-          <Button symbol={"."} />
-          <Button symbol={"="} />
-          <Button symbol={"-"} color={buttonColor}/>
+          <Button symbol={"0"} handleClick={addToText}/>
+          <Button symbol={"."} handleClick={addToText}/>
+          <Button symbol={"="} handleClick={calculateResult}/>
+          <Button symbol={"-"} handleClick={addToText} color={buttonColor}/>
         </div>
-        <Button symbol={"Clear"} color={clearBtnColor}/>
+        <Button symbol={"Clear"} handleClick={clearText} color={clearBtnColor}/>
       </div>
     </div>
   );
